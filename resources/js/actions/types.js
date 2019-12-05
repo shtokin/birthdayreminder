@@ -1,0 +1,13 @@
+export const SIGN_IN = 'SIGN_IN';
+
+export const SIGN_OUT = 'SIGN_OUT';
+
+export const FETCH_BIRTHDAYS = 'FETCH_BIRTHDAYS';
+
+export const CREATE_BIRTHDAY = 'CREATE_BIRTHDAY';
+
+export const UPDATE_BIRTHDAY = 'UPDATE_BIRTHDAY';
+
+export const FETCH_BIRTHDAY = 'FETCH_BIRTHDAY';
+
+export const DELETE_BIRTHDAY = 'DELETE_BIRTHDAY';
