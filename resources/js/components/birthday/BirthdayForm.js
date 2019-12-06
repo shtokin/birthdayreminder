@@ -2,7 +2,10 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import {Link} from "react-router-dom";
 import cn from 'classnames';
-import { Image } from 'semantic-ui-react'
+import { Image } from 'semantic-ui-react';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import moment from "moment";
 
 //import ImageInput from "../ImageInput";
 import FieldFileInput from "../FieldFileInput";
@@ -24,6 +27,36 @@ class BirthdayForm extends React.Component {
       </div>
     );
   };
+
+  renderTextArea = ({ input, label, meta }) => {
+    const className = cn('field', {'error': meta.error && meta.touched});
+
+    return (
+      <div className={className}>
+        <label>{label}</label>
+        <textarea {...input} autoComplete="off" type="text" />
+        {this.renderError(meta)}
+      </div>
+    );
+  };
+
+  renderDatepicker = ({ input, label, meta }) => {
+    console.log('DP', input);
+    const selected = moment().toDate();
+    return (
+      <>
+        <label>{label}</label><br/>
+        <DatePicker {...input} label={label} dateForm="MM/DD/YYYY" selected={moment(input.value).isValid() ? moment(input.value).toDate() : null} />
+      </>
+    );
+  };
+
+  renderDatePicker = ({input, placeholder, defaultValue, meta: {touched, error} }) => (
+    <div>
+      <DatePicker {...input} dateFormat="MM/DD/YYYY" selected={input.value ? moment(input.value) : null} />
+      {touched && error && <span>{error}</span>}
+    </div>
+  );
 
   renderError({ error, touched }) {
     if (touched && error) {
@@ -58,8 +91,8 @@ class BirthdayForm extends React.Component {
           </div>
           <div className="ui segment">
             <Field name="name" component={this.renderInput} label="Name" onChange={() => {}} />
-            <Field name="date" component={this.renderInput} label="Date" />
-            <Field name="description" component={this.renderInput} label="Description" />
+            <Field name="date" component={this.renderDatepicker} label="Date" />
+            <Field name="description" component={this.renderTextArea} label="Description" />
           </div>
         </div>
         <div style={{float: 'right'}}>

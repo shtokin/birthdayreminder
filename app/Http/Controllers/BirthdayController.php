@@ -16,7 +16,7 @@ class BirthdayController extends Controller
         $userId = $request->get('userId');
         $name = $request->get('name');
         $date = $request->get('date');
-        $description = $request->get('description');
+        $description = $request->get('description', '');
 
         $photoUrl = '';
         if ($request->hasFile('photo')) {
@@ -82,8 +82,8 @@ class BirthdayController extends Controller
 
         $photoUrl = '';
         if ($request->hasFile('photo')) {
+            $this->deleteCurrentPhoto($userId, $birthdayId);
             $photoUrl = $this->savePhoto($request->file('photo'), $userId);
-            // TODO delete old photo
         }
 
         $birthdayData = [
@@ -102,8 +102,23 @@ class BirthdayController extends Controller
 
     public function deleteBirthday(Request $request, $userId, $birthdayId)
     {
+        $this->deleteCurrentPhoto($userId, $birthdayId);
+
         DB::connection('mongodb')->collection('birthdays')
             ->where('_id', $userId)->unset('birthdays.' . $birthdayId);
         return $birthdayId;
+    }
+
+    private function deleteCurrentPhoto($userId, $birthdayId)
+    {
+        $result = DB::connection('mongodb')->collection('birthdays')->where(['_id' => $userId])
+            ->select(['birthdays.' . $birthdayId ])
+            ->first();
+
+        $url = current($result['birthdays'])['photo'];
+        $filePath = str_replace('/storage', 'public', $url);
+        if ($url && Storage::exists($filePath)) {
+            Storage::delete($filePath);
+        }
     }
 }
