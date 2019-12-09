@@ -39,7 +39,8 @@ export const getBirthdaysList = () => async (dispatch, getState) => {
 
 export const createBirthday = (formData) => async (dispatch, getState) => {
   let postData = new FormData();
-  postData.append('date', formData.date ? moment(formData.date, 'MM/DD/YYYY') : '');
+  let dataString = formData.date ? moment(formData.date, 'MM/DD/YYYY').format('MM/DD/YYYY') : '';
+  postData.append('date', dataString);
   postData.append('name', formData.name ? formData.name : '');
   postData.append('description', formData.description ? formData.description : '');
   postData.append('photo', formData.photo ? formData.photo : '');

@@ -41,10 +41,8 @@ class BirthdayForm extends React.Component {
   };
 
   renderDatepicker = ({ input, label, meta }) => {
-    console.log('DP', moment(new Date(input.value)).format('MM/DD/YYYY'));
-    //moment(new Date("27/04/2016")).format
     const selectedDate = moment(input.value).isValid() ? moment(input.value).toDate() : null;
-    //const selectedDate = moment(input.value).isValid() ? new Date(input.value) : null;
+
     return (
       <>
         <label>{label}</label><br/>
@@ -78,7 +76,7 @@ class BirthdayForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.props.handleSubmit(this.onSubmit)} className="ui form error item" encType="multipart/form-data">
+      <form onSubmit={this.props.handleSubmit(this.onSubmit)} className="ui form error item" encType="multipart/form-data" autoComplete="off">
         <div className="ui horizontal segments">
           <div className="ui segment">
             <Image src={this.props.photoUrl} size='large' className="rounded" />
