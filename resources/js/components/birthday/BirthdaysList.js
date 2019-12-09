@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import {Image} from "semantic-ui-react";
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import { store } from 'react-notifications-component';
 
 class BirthdaysList extends React.Component {
   state = {
@@ -13,7 +12,6 @@ class BirthdaysList extends React.Component {
   };
 
   componentDidMount() {
-    console.log('didMount');
     this.props.getBirthdaysList();
   }
 
@@ -79,34 +77,6 @@ class BirthdaysList extends React.Component {
     }
   }
 
-  showNoti() {
-    const notification = {
-      title: "Wonderful!",
-      message: "Configurable",
-      type: "success",
-      insert: "top",
-      container: "top-right",
-      animationIn: ["animated", "fadeIn"],
-      animationOut: ["animated", "fadeOut"]
-    };
-
-    store.addNotification({
-      ...notification,
-      touchSlidingExit: {
-        swipe: {
-          duration: 400,
-          timingFunction: 'ease-out',
-          delay: 0,
-        },
-        fade: {
-          duration: 400,
-          timingFunction: 'ease-out',
-          delay: 0
-        }
-      }
-    })
-  }
-
   render() {
     return (
       <div>
@@ -114,7 +84,6 @@ class BirthdaysList extends React.Component {
           <Link to="/birthday/new" className="ui button primary">
             Add
           </Link>
-          <button onClick={this.showNoti}>ffff</button>
         </div>
         <div className="ui celled list">{this.renderList()}</div>
       </div>

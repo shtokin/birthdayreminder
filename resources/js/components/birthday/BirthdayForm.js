@@ -41,22 +41,17 @@ class BirthdayForm extends React.Component {
   };
 
   renderDatepicker = ({ input, label, meta }) => {
-    console.log('DP', input);
-    const selected = moment().toDate();
+    console.log('DP', moment(new Date(input.value)).format('MM/DD/YYYY'));
+    //moment(new Date("27/04/2016")).format
+    const selectedDate = moment(input.value).isValid() ? moment(input.value).toDate() : null;
+    //const selectedDate = moment(input.value).isValid() ? new Date(input.value) : null;
     return (
       <>
         <label>{label}</label><br/>
-        <DatePicker {...input} label={label} dateForm="MM/DD/YYYY" selected={moment(input.value).isValid() ? moment(input.value).toDate() : null} />
+        <DatePicker {...input} label={label} dateForm="MM/DD/YYYY" selected={selectedDate} />
       </>
     );
   };
-
-  renderDatePicker = ({input, placeholder, defaultValue, meta: {touched, error} }) => (
-    <div>
-      <DatePicker {...input} dateFormat="MM/DD/YYYY" selected={input.value ? moment(input.value) : null} />
-      {touched && error && <span>{error}</span>}
-    </div>
-  );
 
   renderError({ error, touched }) {
     if (touched && error) {

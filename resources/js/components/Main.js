@@ -10,6 +10,7 @@ import Settings from "./Settings";
 import BirthdaysList from "./birthday/BirthdaysList";
 import BirthdayEdit from "./birthday/BirthdayEdit";
 import BirthdayCreate from "./birthday/BirthdayCreate";
+import Notificator from "./Notificator";
 
 const App = () => {
 
@@ -18,6 +19,7 @@ const App = () => {
       <Router history={history}>
         <ReactNotification />
         <Header />
+        <Notificator />
         <Switch>
           <Route path="/" exact component={BirthdaysList} />
           <Route path="/birthday/new" exact component={BirthdayCreate} />

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import moment from "moment";
 import {
   SIGN_IN,
   SIGN_OUT,
@@ -6,7 +7,8 @@ import {
   CREATE_BIRTHDAY,
   UPDATE_BIRTHDAY,
   FETCH_BIRTHDAY,
-  DELETE_BIRTHDAY
+  DELETE_BIRTHDAY,
+  SHOW_NOTIFICATION
 } from "./types";
 import history from "../history";
 
@@ -37,7 +39,7 @@ export const getBirthdaysList = () => async (dispatch, getState) => {
 
 export const createBirthday = (formData) => async (dispatch, getState) => {
   let postData = new FormData();
-  postData.append('date', formData.date ? formData.date : '');
+  postData.append('date', formData.date ? moment(formData.date, 'MM/DD/YYYY') : '');
   postData.append('name', formData.name ? formData.name : '');
   postData.append('description', formData.description ? formData.description : '');
   postData.append('photo', formData.photo ? formData.photo : '');
@@ -62,7 +64,8 @@ export const createBirthday = (formData) => async (dispatch, getState) => {
 
 export const updateBirthday = (formData, birthdayId) => async (dispatch, getState) => {
   let postData = new FormData();
-  postData.append('date', formData.date);
+  let dataString = moment(formData.date, 'MM/DD/YYYY').format('MM/DD/YYYY');
+  postData.append('date', dataString);
   postData.append('name', formData.name);
   postData.append('description', formData.description);
   postData.append('photo', formData.photo);
@@ -103,6 +106,13 @@ export const getBirthday = (birthdayId) => async (dispatch, getState) => {
       payload: data
     });
   }
+};
+
+export const setNotificationShowed = () => {
+  return {
+    type: SHOW_NOTIFICATION,
+    payload: { isShowed: true }
+  };
 };
 
 
