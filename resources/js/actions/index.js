@@ -26,7 +26,6 @@ export const signOut = () => {
 };
 
 export const getBirthdaysList = () => async (dispatch, getState) => {
-  console.log('gbL', getState());
   const userId = getState().auth.userId;
   if (userId) {
     const {data} = await axios.get(`/api/birthday/${userId}/list`);

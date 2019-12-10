@@ -7,10 +7,11 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
 
-//import ImageInput from "../ImageInput";
 import FieldFileInput from "../FieldFileInput";
 
 class BirthdayForm extends React.Component {
+
+  state = { imageFile: [] };
 
   onSubmit = (formValues) => {
     this.props.onSubmit(formValues);
@@ -61,26 +62,12 @@ class BirthdayForm extends React.Component {
     }
   }
 
-// <ImageInput
-// name="add_photo"
-// label="Others:"
-// classNameLabel="file-input-label"
-// className="file-input"
-// dropzone_options={{
-//   multiple: false,
-//   accept: 'image/*'
-// }}
-// >
-// <span>Add more</span>
-// </ImageInput>
-
   render() {
     return (
       <form onSubmit={this.props.handleSubmit(this.onSubmit)} className="ui form error item" encType="multipart/form-data" autoComplete="off">
         <div className="ui horizontal segments">
           <div className="ui segment">
-            <Image src={this.props.photoUrl} size='large' className="rounded" />
-            <Field name="photo" component={FieldFileInput} label="Photo" />
+            <Field name="photo" component={FieldFileInput} label="Upload Photo" photoUrl={this.props.photoUrl} />
           </div>
           <div className="ui segment">
             <Field name="name" component={this.renderInput} label="Name" onChange={() => {}} />

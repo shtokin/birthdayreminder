@@ -48,24 +48,15 @@ class GoogleAuth extends React.Component {
     } else if (this.props.isSignedIn) {
       const trigger = (
         <span>
-          <Icon name='upload' /> Hello, {userName}
+          <Icon name='user' /> Hello, {userName}
         </span>
       );
 
-      const userOptions = [
-        // {
-        //   key: 'user',
-        //   text: (
-        //     <span>
-        //       Signed in as <strong>{userName}</strong>
-        //     </span>
-        //   ),
-        //   disabled: true,
-        // },
+      let userOptions = [
         {
-          key: 'admin',
+          key: 'birthdays',
           text: (
-            <Link to="/admin" className="item">Admin panel</Link>
+            <Link to="/" className="item">Birthdays</Link>
           )
         },
         {
@@ -81,6 +72,17 @@ class GoogleAuth extends React.Component {
           )
         },
       ];
+
+      const adminUserId = '106462253192543392587';
+      if (this.props.userId === adminUserId) {
+        const adminMenu = {
+          key: 'admin',
+          text: (
+            <Link to="/admin" className="item">Admin panel</Link>
+          )
+        };
+        userOptions = [adminMenu, ...userOptions];
+      }
 
       return (
         <Dropdown trigger={trigger} options={userOptions} />
@@ -98,7 +100,7 @@ class GoogleAuth extends React.Component {
 
   render() {
     return (
-        <div className="right menu">
+        <div className="right menu user-menu">
           {this.renderAuthButton()}
         </div>
     );
@@ -108,7 +110,8 @@ class GoogleAuth extends React.Component {
 const mapStateToProps = (state) => {
   return {
     isSignedIn: state.auth.isSignedIn,
-    userName: state.auth.userName
+    userName: state.auth.userName,
+    userId: state.auth.userId
   };
 };
 

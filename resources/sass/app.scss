@@ -1,1 +1,10 @@
 //
+.title-link {
+  font-weight: bold;
+  font-size: 22px;
+  margin-left: 20px;
+}
+
+.user-menu .ui.secondary.pointing.menu .active.item {
+  border-color: transparent !important;
+}
