@@ -20,8 +20,7 @@ export default class FieldFileInput  extends Component{
   }
 
   render(){
-    const { input: { value } } = this.props;
-    const {input,label, required, meta, photoUrl } = this.props;
+    const {label, photoUrl } = this.props;
 
     let photoSrc = this.state.file ? this.state.file : photoUrl;
     return(

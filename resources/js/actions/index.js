@@ -8,7 +8,10 @@ import {
   UPDATE_BIRTHDAY,
   FETCH_BIRTHDAY,
   DELETE_BIRTHDAY,
-  SHOW_NOTIFICATION
+  SHOW_NOTIFICATION,
+  FETCH_SETTINGS,
+  SAVE_LANGUAGE,
+  SAVE_THEME
 } from "./types";
 import history from "../history";
 
@@ -113,6 +116,49 @@ export const setNotificationShowed = () => {
     type: SHOW_NOTIFICATION,
     payload: { isShowed: true }
   };
+};
+
+export const fetchSettings = () => async (dispatch, getState) => {
+  const userId = getState().auth.userId;
+  if (userId) {
+    const {data} = await axios.get(`/api/settings/${userId}`);
+    dispatch({
+      type: FETCH_SETTINGS,
+      payload: data
+    });
+  }
+};
+
+export const saveLanguage = (lang) => async (dispatch, getState) => {
+  const userId = getState().auth.userId;
+  if (userId) {
+    let postData = new FormData();
+    postData.append('language', lang);
+    const { data } = await axios.post(
+      `/api/settings/${userId}/language`,
+      postData
+    );
+    dispatch({
+      type: SAVE_LANGUAGE,
+      payload: data
+    });
+  }
+};
+
+export const saveTheme = (lang) => async (dispatch, getState) => {
+  const userId = getState().auth.userId;
+  if (userId) {
+    let postData = new FormData();
+    postData.append('theme', lang);
+    const { data } = await axios.post(
+      `/api/settings/${userId}/theme`,
+      postData
+    );
+    dispatch({
+      type: SAVE_THEME,
+      payload: data
+    });
+  }
 };
 
 

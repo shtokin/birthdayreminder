@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 import { Dropdown, Icon } from "semantic-ui-react";
 
-import { signIn, signOut, getBirthdaysList } from "../actions";
+import { signIn, signOut, getBirthdaysList, fetchSettings } from "../actions";
 
 class GoogleAuth extends React.Component {
   componentDidMount() {
@@ -27,6 +27,7 @@ class GoogleAuth extends React.Component {
         userName: this.auth.currentUser.get().getBasicProfile().getGivenName()
       });
       this.props.getBirthdaysList();
+      this.props.fetchSettings();
     } else {
       this.props.signOut();
     }
@@ -115,4 +116,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {signIn, signOut, getBirthdaysList})(GoogleAuth);
+export default connect(mapStateToProps, {signIn, signOut, getBirthdaysList, fetchSettings})(GoogleAuth);
