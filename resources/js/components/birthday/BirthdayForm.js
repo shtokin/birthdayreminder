@@ -2,10 +2,10 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import {Link} from "react-router-dom";
 import cn from 'classnames';
-import { Image } from 'semantic-ui-react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
+import { FormattedMessage, injectIntl } from 'react-intl';
 
 import FieldFileInput from "../FieldFileInput";
 
@@ -63,21 +63,27 @@ class BirthdayForm extends React.Component {
   }
 
   render() {
+    const { intl } = this.props;
+
     return (
-      <form onSubmit={this.props.handleSubmit(this.onSubmit)} className="ui form error item" encType="multipart/form-data" autoComplete="off">
+      <form onSubmit={this.props.handleSubmit(this.onSubmit)} className="ui form error item"
+        encType="multipart/form-data" autoComplete="off">
         <div className="ui horizontal segments">
           <div className="ui segment">
-            <Field name="photo" component={FieldFileInput} label="Upload Photo" photoUrl={this.props.photoUrl} />
+            <Field name="photo" component={FieldFileInput} label={intl.formatMessage({id: "app.upload-photo"})}
+              photoUrl={this.props.photoUrl} />
           </div>
           <div className="ui segment">
-            <Field name="name" component={this.renderInput} label="Name" onChange={() => {}} />
-            <Field name="date" component={this.renderDatepicker} label="Date" />
-            <Field name="description" component={this.renderTextArea} label="Description" />
+            <Field name="name" component={this.renderInput}
+              label={intl.formatMessage({id: "app.name"})} onChange={() => {}} />
+            <Field name="date" component={this.renderDatepicker} label={intl.formatMessage({id: "app.date"})} />
+            <Field name="description" component={this.renderTextArea}
+              label={intl.formatMessage({id: "app.description"})} />
           </div>
         </div>
         <div style={{float: 'right'}}>
-          <button className="ui button primary">Submit</button>
-          <Link to="/" className="ui button">Cancel</Link>
+          <button className="ui button primary">{intl.formatMessage({id: "app.submit"})}</button>
+          <Link to="/" className="ui button">{intl.formatMessage({id: "app.cancel"})}</Link>
         </div>
       </form>
     );
@@ -101,4 +107,4 @@ const validate = (formValues) => {
 export default reduxForm({
   form: 'birthdayForm',
   validate
-})(BirthdayForm);
+})(injectIntl(BirthdayForm));

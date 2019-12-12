@@ -7,6 +7,7 @@ import reduxThunk from 'redux-thunk';
 import App from './Main';
 import reducers from '../reducers';
 
+
 function logger({ getState }) {
   return next => action => {
     console.log('will dispatch', action)

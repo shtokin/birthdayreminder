@@ -27,3 +27,7 @@ Route::post('/birthday/{birthdayId}', 'BirthdayController@updateBirthday');
 Route::post('/birthday', 'BirthdayController@create');
 
 Route::delete('/birthday/{userId}/{birthdayId}', 'BirthdayController@deleteBirthday');
+
+Route::get('/settings/{userId}', 'SettingsController@getSettings');
+Route::post('/settings/{userId}/language', 'SettingsController@saveLanguage');
+Route::post('/settings/{userId}/theme', 'SettingsController@saveTheme');
