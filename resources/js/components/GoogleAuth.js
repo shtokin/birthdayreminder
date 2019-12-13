@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 import { Dropdown, Icon } from "semantic-ui-react";
+import { FormattedMessage } from 'react-intl';
 
 import { signIn, signOut, getBirthdaysList, fetchSettings } from "../actions";
 
@@ -16,6 +17,7 @@ class GoogleAuth extends React.Component {
         this.onAuthChange(this.auth.isSignedIn.get());
         this.auth.isSignedIn.listen(this.onAuthChange);
         this.props.getBirthdaysList();
+        this.props.fetchSettings();
       });
     });
   }
@@ -49,7 +51,10 @@ class GoogleAuth extends React.Component {
     } else if (this.props.isSignedIn) {
       const trigger = (
         <span>
-          <Icon name='user' /> Hello, {userName}
+          <Icon name='user' />
+          <FormattedMessage id="app.hello"
+            defaultMessage="Hello"
+            description="Hello" />, {userName}
         </span>
       );
 
@@ -57,33 +62,45 @@ class GoogleAuth extends React.Component {
         {
           key: 'birthdays',
           text: (
-            <Link to="/" className="item">Birthdays</Link>
+            <Link to="/" className="item">
+              <FormattedMessage id="app.birthdays"
+                defaultMessage="Birthdays"
+                description="Birthdays" />
+            </Link>
           )
         },
         {
           key: 'settings',
           text: (
-            <Link to="/settings" className="item">Settings</Link>
+            <Link to="/settings" className="item">
+              <FormattedMessage id="app.settings-title"
+                defaultMessage="Settings"
+                description="Settings" />
+            </Link>
           )
         },
         {
           key: 'sign-out',
           text: (
-            <span className="item" onClick={this.onSignOutClick}>Sign Out</span>
+            <span className="item" onClick={this.onSignOutClick}>
+              <FormattedMessage id="app.sign-out"
+                defaultMessage="Sign Out"
+                description="Sign Out" />
+            </span>
           )
         },
       ];
 
-      const adminUserId = '106462253192543392587';
-      if (this.props.userId === adminUserId) {
-        const adminMenu = {
-          key: 'admin',
-          text: (
-            <Link to="/admin" className="item">Admin panel</Link>
-          )
-        };
-        userOptions = [adminMenu, ...userOptions];
-      }
+      // const adminUserId = '106462253192543392587';
+      // if (this.props.userId === adminUserId) {
+      //   const adminMenu = {
+      //     key: 'admin',
+      //     text: (
+      //       <Link to="/admin" className="item">Admin panel</Link>
+      //     )
+      //   };
+      //   userOptions = [adminMenu, ...userOptions];
+      // }
 
       return (
         <Dropdown trigger={trigger} options={userOptions} />
@@ -92,7 +109,9 @@ class GoogleAuth extends React.Component {
       return (
         <button className="ui google blue basic button"  onClick={this.onSignInClick}>
           <i className="google icon" />
-          Sign In with Google
+          <FormattedMessage id="app.sign-in-google"
+            defaultMessage="Sign In with Google"
+            description="Sign In with Google" />
         </button>
       );
     }

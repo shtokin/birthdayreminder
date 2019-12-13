@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Dropdown } from 'semantic-ui-react';
 import { languageList } from './languageList';
 import { fetchSettings, saveLanguage, saveTheme } from '../actions'
+import { FormattedMessage } from 'react-intl';
 
 class Settings extends React.Component {
 
@@ -23,9 +24,12 @@ class Settings extends React.Component {
     const countryOptions = languageList;
     return (
       <div>
-        <label>Language</label>
+        <label>
+          <FormattedMessage id="app.language"
+            defaultMessage="Language"
+            description="Language" />
+        </label>
         <Dropdown
-          placeholder='Select Language'
           fluid
           selection
           options={countryOptions}
@@ -44,9 +48,12 @@ class Settings extends React.Component {
 
     return (
       <div>
-        <label>Theme</label>
+        <label>
+          <FormattedMessage id="app.theme"
+            defaultMessage="Theme"
+            description="Theme" />
+        </label>
         <Dropdown
-          placeholder='Select Theme'
           fluid
           selection
           options={themes}
@@ -60,7 +67,11 @@ class Settings extends React.Component {
   render() {
     return (
       <div className="ui segment">
-        <h3>Settings</h3>
+        <h3>
+          <FormattedMessage id="app.settings-title"
+            defaultMessage="Settings"
+            description="Settings" />
+        </h3>
         {this.renderLanguage()}
         {this.renderTheme()}
       </div>

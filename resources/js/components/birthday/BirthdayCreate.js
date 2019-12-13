@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createBirthday} from "../../actions";
 import BirthdayForm from "./BirthdayForm";
+import { FormattedMessage } from 'react-intl';
 
 class BirthdayCreate extends React.Component {
   onSubmit = (formData) => {
@@ -11,11 +12,20 @@ class BirthdayCreate extends React.Component {
   render() {
     return (
       <div>
-        <h3>Add a birthday</h3>
-        <BirthdayForm onSubmit={this.onSubmit}/>
+        <h3>
+          <FormattedMessage id="app.add-birthday"
+            defaultMessage="Add a birthday" />
+        </h3>
+        <BirthdayForm onSubmit={this.onSubmit} locale={this.props.locale} />
       </div>
     );
   }
 }
 
-export default connect(null, { createBirthday })(BirthdayCreate);
+const mapStateToProps = (state) => {
+  return {
+    locale: state.settings.language
+  }
+};
+
+export default connect(mapStateToProps, { createBirthday })(BirthdayCreate);

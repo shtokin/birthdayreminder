@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import {Image} from "semantic-ui-react";
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import { FormattedMessage, FormattedDate, injectIntl } from 'react-intl';
+
 
 class BirthdaysList extends React.Component {
   state = {
@@ -16,16 +18,18 @@ class BirthdaysList extends React.Component {
   }
 
   onDelete = (birthdayId) => {
+    const { intl } = this.props;
+
     confirmAlert({
-      title: 'Delete',
-      message: 'Are you sure to delete the birthday?',
+      title: intl.formatMessage({id: 'app.deletion'}),
+      message: intl.formatMessage({id: 'app.delete-confirm'}),
       buttons: [
         {
-          label: 'Yes',
+          label: intl.formatMessage({id: 'app.yes'}),
           onClick: () => this.props.deleteBirthday(birthdayId)
         },
         {
-          label: 'No',
+          label: intl.formatMessage({id: 'app.no'}),
         }
       ]
     });
@@ -35,27 +39,26 @@ class BirthdaysList extends React.Component {
     return (
       <div className="right floated content">
         <Link to={`/birthday/${birthdayId}/edit`} className="ui button primary">
-          Edit
+          <FormattedMessage id="app.edit"
+            defaultMessage="Edit" />
         </Link>
         <div className="ui button negative" onClick={() => this.onDelete(birthdayId)}>
-          Delete
+          <FormattedMessage id="app.delete" defaultMessage="Delete" />
         </div>
       </div>
     );
   }
 
   renderList() {
-    // if (!this.props.birthdays.isLoaded) {
-    //   this.props.getBirthdaysList();
-    // }
     if (this.props.currentUserId && this.props.birthdays.length) {
-      //this.props.getBirthdaysList();
       return this.props.birthdays.map((item) => {
         return (
           <div key={item.id} className="item">
               <Image src={item.photo} size='small' className="rounded" />
               <div className="content">
-                <span className="header">{item.date} {item.name}</span>
+                <span className="header">
+                  <FormattedDate value={item.date} day="numeric" month="numeric" year="numeric" /> {item.name}
+                </span>
                 <div className="description">
                   <p>{item.description}</p>
                 </div>
@@ -68,9 +71,10 @@ class BirthdaysList extends React.Component {
       return (
         <div className="ui segment">
           <div className="ui active inverted dimmer">
-            <div className="ui text loader">Loading</div>
+            <div className="ui text loader">
+              <FormattedMessage id="app.loading" defaultMessage="Loading" />
+            </div>
           </div>
-          <p></p>
         </div>
       );
 
@@ -82,7 +86,7 @@ class BirthdaysList extends React.Component {
       <div>
         <div style={{ textAlign: 'right' }}>
           <Link to="/birthday/new" className="ui button primary">
-            Add
+            <FormattedMessage id="app.add" defaultMessage="Add" />
           </Link>
         </div>
         <div className="ui celled list">{this.renderList()}</div>
@@ -98,4 +102,4 @@ const mapStateToProps = (state) => {
   }
 };
 
-export default connect(mapStateToProps, { getBirthdaysList, deleteBirthday })(BirthdaysList);
+export default connect(mapStateToProps, { getBirthdaysList, deleteBirthday })(injectIntl(BirthdaysList));
