@@ -25,5 +25,6 @@
   "app.submit": "Submit",
   "app.cancel": "Cancel",
   "app.add-birthday": "Add a birthday",
-  "app.edit-birthday": "Edit birthday"
+  "app.edit-birthday": "Edit birthday",
+  "app.required-field": "Required"
 }

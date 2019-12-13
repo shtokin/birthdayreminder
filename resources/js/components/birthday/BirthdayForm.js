@@ -2,19 +2,24 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import {Link} from "react-router-dom";
 import cn from 'classnames';
-import DatePicker from "react-datepicker";
+import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { injectIntl } from 'react-intl';
+import ru from "date-fns/locale/ru";
 
 import FieldFileInput from "../FieldFileInput";
 
-class BirthdayForm extends React.Component {
+registerLocale("ru", ru);
 
-  state = { imageFile: [] };
+class BirthdayForm extends React.Component {
 
   onSubmit = (formValues) => {
     this.props.onSubmit(formValues);
+  };
+
+  required = value => {
+    return value ? undefined : "app.required-field";
   };
 
   renderInput = ({ input, label, meta }) => {
@@ -43,20 +48,28 @@ class BirthdayForm extends React.Component {
 
   renderDatepicker = ({ input, label, meta }) => {
     const selectedDate = moment(input.value).isValid() ? moment(input.value).toDate() : null;
+    const className = cn('field', {'error': meta.error && meta.touched});
+    const dateFormat = this.props.locale === 'ru' ? 'dd.MM.yyyy' : 'MM/dd/yyyy';
+    if (input.value && this.props.locale === 'ru') {
+      input.value = moment(input.value).format('DD.MM.YYYY');
+    }
 
     return (
-      <>
+      <div className={className}>
         <label>{label}</label><br/>
-        <DatePicker {...input} label={label} dateForm="MM/DD/YYYY" selected={selectedDate} />
-      </>
+        <DatePicker {...input} label={label} selected={selectedDate} dateFormat={dateFormat} locale={this.props.locale} />
+        {this.renderError(meta)}
+      </div>
     );
   };
 
   renderError({ error, touched }) {
+    const { intl } = this.props;
+
     if (touched && error) {
       return (
         <div className="ui error message">
-          <div className="header">{error}</div>
+          <div className="header">{intl.formatMessage({id: error})}</div>
         </div>
       );
     }
@@ -75,8 +88,9 @@ class BirthdayForm extends React.Component {
           </div>
           <div className="ui segment">
             <Field name="name" component={this.renderInput}
-              label={intl.formatMessage({id: "app.name"})} onChange={() => {}} />
-            <Field name="date" component={this.renderDatepicker} label={intl.formatMessage({id: "app.date"})} />
+              label={intl.formatMessage({id: "app.name"})} onChange={() => {}} validate={[ this.required ]} />
+            <Field name="date" component={this.renderDatepicker} label={intl.formatMessage({id: "app.date"})}
+              validate={[ this.required ]} />
             <Field name="description" component={this.renderTextArea}
               label={intl.formatMessage({id: "app.description"})} />
           </div>
@@ -90,21 +104,6 @@ class BirthdayForm extends React.Component {
   }
 }
 
-const validate = (formValues) => {
-  const errors = {};
-
-  if (!formValues.name) {
-    errors.title = 'Name is required';
-  }
-
-  if (!formValues.date) {
-    errors.date =  'Date is required';
-  }
-
-  return errors;
-};
-
 export default reduxForm({
-  form: 'birthdayForm',
-  validate
+  form: 'birthdayForm'
 })(injectIntl(BirthdayForm));

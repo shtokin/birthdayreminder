@@ -25,5 +25,6 @@
   "app.submit": "Сохранить",
   "app.cancel": "Отмена",
   "app.add-birthday": "Добавить день рождения",
-  "app.edit-birthday": "Редактировать день рождения"
+  "app.edit-birthday": "Редактировать день рождения",
+  "app.required-field": "Обязательное поле"
 }

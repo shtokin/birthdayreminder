@@ -24,6 +24,7 @@ class BirthdayEdit extends React.Component {
           onSubmit={this.onSubmit}
           initialValues={_.pick(this.props.birthdays, 'name', 'date', 'description' )}
           photoUrl={this.props.birthdays ? this.props.birthdays.photo : null }
+          locale={this.props.locale}
         />
       </div>
     );
@@ -31,7 +32,10 @@ class BirthdayEdit extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  return { birthdays: state.birthdays[ownProps.match.params.id]}
+  return {
+    birthdays: state.birthdays[ownProps.match.params.id],
+    locale: state.settings.language
+  };
 };
 
 export default connect(mapStateToProps, { getBirthday, updateBirthday })(BirthdayEdit);

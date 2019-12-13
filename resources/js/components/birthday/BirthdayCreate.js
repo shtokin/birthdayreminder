@@ -16,10 +16,16 @@ class BirthdayCreate extends React.Component {
           <FormattedMessage id="app.add-birthday"
             defaultMessage="Add a birthday" />
         </h3>
-        <BirthdayForm onSubmit={this.onSubmit}/>
+        <BirthdayForm onSubmit={this.onSubmit} locale={this.props.locale} />
       </div>
     );
   }
 }
 
-export default connect(null, { createBirthday })(BirthdayCreate);
+const mapStateToProps = (state) => {
+  return {
+    locale: state.settings.language
+  }
+};
+
+export default connect(mapStateToProps, { createBirthday })(BirthdayCreate);

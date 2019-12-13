@@ -41,7 +41,7 @@ export const getBirthdaysList = () => async (dispatch, getState) => {
 
 export const createBirthday = (formData) => async (dispatch, getState) => {
   let postData = new FormData();
-  let dataString = formData.date ? moment(formData.date, 'MM/DD/YYYY').format('MM/DD/YYYY') : '';
+  let dataString = formData.date ? moment(formData.date).format('MM/DD/YYYY') : '';
   postData.append('date', dataString);
   postData.append('name', formData.name ? formData.name : '');
   postData.append('description', formData.description ? formData.description : '');
@@ -67,7 +67,7 @@ export const createBirthday = (formData) => async (dispatch, getState) => {
 
 export const updateBirthday = (formData, birthdayId) => async (dispatch, getState) => {
   let postData = new FormData();
-  let dataString = moment(formData.date, 'MM/DD/YYYY').format('MM/DD/YYYY');
+  let dataString = moment(formData.date).format('MM/DD/YYYY');
   postData.append('date', dataString);
   postData.append('name', formData.name);
   postData.append('description', formData.description);
