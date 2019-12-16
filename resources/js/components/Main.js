@@ -15,6 +15,7 @@ import Notificator from "./Notificator";
 import { IntlProvider } from "react-intl";
 import messages_en from "../translations/en.json";
 import messages_ru from "../translations/ru.json";
+import PropTypes from "prop-types";
 
 const messages = {
   'en': messages_en,
@@ -41,6 +42,10 @@ const App = (props) => {
       </Router>
     </Fragment>
   );
+};
+
+App.propTypes = {
+  locale: PropTypes.string
 };
 
 const mapStateToProps = state => ({ locale: state.settings.language });

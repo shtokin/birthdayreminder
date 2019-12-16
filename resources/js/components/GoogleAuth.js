@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 import { Dropdown, Icon } from "semantic-ui-react";
 import { FormattedMessage } from 'react-intl';
+import PropTypes from "prop-types";
 
 import { signIn, signOut, getBirthdaysList, fetchSettings } from "../actions";
 
@@ -137,6 +138,16 @@ class GoogleAuth extends React.Component {
     );
   }
 }
+
+GoogleAuth.propTypes = {
+  signIn: PropTypes.func,
+  signOut: PropTypes.func,
+  getBirthdaysList: PropTypes.func,
+  fetchSettings: PropTypes.func,
+  userName: PropTypes.string,
+  userId: PropTypes.string,
+  isSignedIn: PropTypes.bool
+};
 
 const mapStateToProps = (state) => {
   return {

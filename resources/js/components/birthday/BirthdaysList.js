@@ -6,6 +6,7 @@ import {Image} from "semantic-ui-react";
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { FormattedMessage, FormattedDate, injectIntl } from 'react-intl';
+import PropTypes from 'prop-types';
 
 
 class BirthdaysList extends React.Component {
@@ -94,6 +95,13 @@ class BirthdaysList extends React.Component {
     );
   }
 }
+
+BirthdaysList.propTypes = {
+  getBirthdaysList: PropTypes.func,
+  deleteBirthday: PropTypes.func,
+  currentUserId: PropTypes.string,
+  birthdays: PropTypes.array
+};
 
 const mapStateToProps = (state) => {
   return {

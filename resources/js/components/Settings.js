@@ -4,11 +4,11 @@ import { Dropdown } from 'semantic-ui-react';
 import { languageList } from './languageList';
 import { fetchSettings, saveLanguage, saveTheme } from '../actions'
 import { FormattedMessage } from 'react-intl';
+import PropTypes from "prop-types";
 
 class Settings extends React.Component {
 
   componentDidMount() {
-    console.log('did', this.props);
     this.props.fetchSettings();
   }
 
@@ -78,6 +78,14 @@ class Settings extends React.Component {
     );
   }
 }
+
+Settings.propTypes = {
+  fetchSettings: PropTypes.func,
+  saveLanguage: PropTypes.func,
+  saveTheme: PropTypes.func,
+  language: PropTypes.string,
+  theme: PropTypes.string
+};
 
 const mapStateToProps = (state) => {
   return {

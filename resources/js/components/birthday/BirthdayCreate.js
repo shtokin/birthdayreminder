@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { createBirthday} from "../../actions";
 import BirthdayForm from "./BirthdayForm";
 import { FormattedMessage } from 'react-intl';
+import PropTypes from 'prop-types';
 
 class BirthdayCreate extends React.Component {
   onSubmit = (formData) => {
@@ -21,6 +22,11 @@ class BirthdayCreate extends React.Component {
     );
   }
 }
+
+BirthdayCreate.propTypes = {
+  createBirthday: PropTypes.func,
+  locale: PropTypes.string,
+};
 
 const mapStateToProps = (state) => {
   return {

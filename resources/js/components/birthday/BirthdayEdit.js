@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { updateBirthday, getBirthday } from "../../actions";
 import BirthdayForm from "./BirthdayForm";
 import { FormattedMessage } from 'react-intl';
+import PropTypes from "prop-types";
 
 class BirthdayEdit extends React.Component {
   componentDidMount() {
@@ -30,6 +31,13 @@ class BirthdayEdit extends React.Component {
     );
   }
 }
+
+BirthdayEdit.propTypes = {
+  getBirthday: PropTypes.func,
+  updateBirthday: PropTypes.func,
+  locale: PropTypes.string,
+  birthdays: PropTypes.object
+};
 
 const mapStateToProps = (state, ownProps) => {
   return {

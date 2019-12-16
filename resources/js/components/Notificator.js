@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {store} from "react-notifications-component";
 import moment from "moment";
+import PropTypes from "prop-types";
 
 import { setNotificationShowed } from "../actions";
 import notificationContent from "./notificationContent";
@@ -57,6 +58,12 @@ class Notificator extends React.Component {
     return '';
   }
 }
+
+Notificator.propTypes = {
+  setNotificationShowed: PropTypes.func,
+  birthdays: PropTypes.array,
+  isShowed: PropTypes.bool
+};
 
 const mapStateToProps = (state) => {
   return {
