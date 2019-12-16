@@ -35,6 +35,14 @@ class GoogleAuth extends React.Component {
     }
   };
 
+  fakeAuth = () => {
+    this.props.signIn({
+      userId: '106462253192543392587',
+      userName: 'Fake user'
+    });
+    this.props.getBirthdaysList();
+  };
+
   onSignInClick = () => {
     this.auth.signIn();
   };
@@ -107,12 +115,15 @@ class GoogleAuth extends React.Component {
       );
     } else {
       return (
-        <button className="ui google blue basic button"  onClick={this.onSignInClick}>
-          <i className="google icon" />
-          <FormattedMessage id="app.sign-in-google"
-            defaultMessage="Sign In with Google"
-            description="Sign In with Google" />
-        </button>
+        <>
+          <button onClick={this.fakeAuth}>Fake auth</button>
+          <button className="ui google blue basic button"  onClick={this.onSignInClick}>
+            <i className="google icon" />
+            <FormattedMessage id="app.sign-in-google"
+              defaultMessage="Sign In with Google"
+              description="Sign In with Google" />
+          </button>
+        </>
       );
     }
 
