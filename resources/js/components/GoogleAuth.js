@@ -42,6 +42,7 @@ class GoogleAuth extends React.Component {
       userName: 'Fake user'
     });
     this.props.getBirthdaysList();
+    this.props.fetchSettings();
   };
 
   onSignInClick = () => {
