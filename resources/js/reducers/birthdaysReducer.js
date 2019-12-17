@@ -4,7 +4,7 @@ import _ from 'lodash';
 export default (state = {}, action) => {
   switch (action.type) {
     case FETCH_BIRTHDAYS:
-      return { ...state, ..._.mapKeys(action.payload, 'id') };
+      return { ...state, ...action.payload};
     case FETCH_BIRTHDAY:
     case CREATE_BIRTHDAY:
     case UPDATE_BIRTHDAY:
