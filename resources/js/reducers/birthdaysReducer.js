@@ -1,4 +1,4 @@
-import { FETCH_BIRTHDAYS, CREATE_BIRTHDAY, FETCH_BIRTHDAY, DELETE_BIRTHDAY } from "../actions/types";
+import { FETCH_BIRTHDAYS, CREATE_BIRTHDAY, FETCH_BIRTHDAY, DELETE_BIRTHDAY, UPDATE_BIRTHDAY } from "../actions/types";
 import _ from 'lodash';
 
 export default (state = {}, action) => {
@@ -7,6 +7,7 @@ export default (state = {}, action) => {
       return { ...state, ..._.mapKeys(action.payload, 'id') };
     case FETCH_BIRTHDAY:
     case CREATE_BIRTHDAY:
+    case UPDATE_BIRTHDAY:
       return { ...state, [action.payload.id]: action.payload };
     case DELETE_BIRTHDAY:
       return _.omit(state, action.payload);
