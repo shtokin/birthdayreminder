@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Admin snapshot renders 1`] = `
+<div>
+  Admin panel
+</div>
+`;
+
+exports[`FieldFileInput snapshot renders 1`] = `
+<div>
+  <label
+    className="ui icon button"
+    onClick={[Function]}
+  >
+    <i
+      className="file icon"
+    />
+  </label>
+  <img
+    className="ui large image rounded"
+  />
+  <input
+    accept=".jpg, .png, .jpeg"
+    onChange={[Function]}
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+    type="file"
+  />
+</div>
+`;

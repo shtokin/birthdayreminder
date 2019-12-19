@@ -11,13 +11,23 @@
     },
     "devDependencies": {
         "@babel/plugin-proposal-class-properties": "^7.7.4",
-        "@babel/preset-react": "^7.0.0",
+        "@babel/preset-env": "^7.7.6",
+        "@babel/preset-react": "^7.7.4",
         "axios": "^0.19",
+        "babel-jest": "^24.9.0",
         "cross-env": "^5.1",
+        "enzyme": "^3.10.0",
+        "enzyme-adapter-react-15": "^1.4.1",
+        "enzyme-adapter-react-16": "^1.15.1",
+        "enzyme-to-json": "^3.4.3",
+        "jest": "^24.9.0",
+        "jest-css-modules": "^2.1.0",
         "laravel-mix": "^4.0.7",
         "lodash": "^4.17.13",
         "react": "^16.2.0",
         "react-dom": "^16.2.0",
+        "react-test-renderer": "^16.12.0",
+        "redux-mock-store": "^1.5.4",
         "resolve-url-loader": "^2.3.1",
         "sass": "^1.15.2",
         "sass-loader": "^7.1.0"
@@ -40,5 +50,13 @@
         "redux-thunk": "^2.3.0",
         "semantic-ui": "^2.4.2",
         "semantic-ui-react": "^0.88.1"
+    },
+    "jest": {
+        "setupFilesAfterEnv": [
+            "<rootDir>/setupTests.js"
+        ],
+        "moduleNameMapper": {
+            "\\.(css|less|scss|sss|styl)$": "<rootDir>/node_modules/jest-css-modules"
+        }
     }
 }

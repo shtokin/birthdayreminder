@@ -1,0 +1,8 @@
+{
+  "testRegex": "((\\.|/*.)(spec))\\.js?$",
+  "snapshotSerializers": ["enzyme-to-json/serializer"],
+  "coverageReporters": ["text"],
+  "setupFilesAfterEnv": [
+    "./jest.setup.js"
+  ]
+}
