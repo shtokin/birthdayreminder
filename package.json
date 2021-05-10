@@ -23,7 +23,7 @@
         "jest": "^24.9.0",
         "jest-css-modules": "^2.1.0",
         "laravel-mix": "^4.0.7",
-        "lodash": "^4.17.13",
+        "lodash": "^4.17.21",
         "react": "^16.2.0",
         "react-dom": "^16.2.0",
         "react-test-renderer": "^16.12.0",
