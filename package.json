@@ -36,7 +36,7 @@
         "classnames": "^2.2.6",
         "date-fns": "^2.8.1",
         "i18next": "^19.0.1",
-        "moment": "^2.24.0",
+        "moment": "^2.29.4",
         "react-confirm-alert": "^2.4.1",
         "react-datepicker": "^2.10.1",
         "react-dropzone": "^10.2.1",
